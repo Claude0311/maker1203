@@ -57,6 +57,7 @@ app.post('/chdb', function (req, res) {
 
 app.all('/getdata',function(req,res){
 	//var hand_val = 40;
+	var weather_val = require('./weather.js');
 	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
@@ -64,7 +65,7 @@ app.all('/getdata',function(req,res){
 			if(obj.length > 0){
                 //傳直
 				var hand_val = obj[0].control||50;
-				res.send({data:{hand:hand_val,weather:20}});
+				res.send({data:{hand:hand_val,weather:weather_val||50}});
 				console.log('hand & weather sent');
             }
 			else{
