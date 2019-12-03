@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 //链接本地数据库
 var DB_URL = process.env.MONGOLDB_URI || 'mongodb://localhost:27017/mongoose'; 
+
 mongoose.connect(DB_URL);
 
 app.use(express.static('public'));
@@ -61,12 +62,14 @@ app.all('/getdata',function(req,res){
             console.log("Error:" + err);
         }else{
 			if(obj.length > 0){
-                //新建
+                //傳直
 				var hand_val = obj[0].control||50;
-				res.send({data:{hand:hand_val,weather:20}})
+				res.send({data:{hand:hand_val,weather:20}});
+				console.log('hand & weather sent');
             }
 			else{
-				res.send({data:{weather:20}})
+				res.send({data:{weather:20}});
+				console.log('weather sent');
 			}
 		}
 	})
@@ -74,4 +77,5 @@ app.all('/getdata',function(req,res){
 
 var server = app.listen(process.env.PORT||1993,function(){
     console.log('server connect');
+	console.log(DB_URL);
 })
