@@ -11,6 +11,12 @@ mongoose.connect(DB_URL);
 app.use(express.static('public'));
 //解析表单数据
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+})
 //显示静态页面
 app.get('/',function(req,res){
     res.render('index',__dirname+"public/index.html")
@@ -19,6 +25,7 @@ app.get('/',function(req,res){
 var ConSchema = require('./schemas/hand.js');
 app.post('/chdb', function (req, res) {
   var percent = req.body.percent;
+  console.log('percent',percent,"body",req.body);
   ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
@@ -33,17 +40,37 @@ app.post('/chdb', function (req, res) {
 					else{
 						console.log('成功儲存：');
 						//console.log(res);
+						res.send({status:'success',message:true});
 				}});
             }else{
 				console.log("更改資料");
-                ConSchema.updateOne({ID:'123'},{$set:{control:Number}},function(err,res){
-						if (err) throw err;
+                ConSchema.updateOne({ID:'123'},{$set:{control:percent}},function(err,res){
+					if (err) throw err;
+					
 				});
-				//res.send({status:'success',message:false})
+				res.send({status:'success',message:true});
 			}
 		}
   })
 });
+
+app.all('/getdata',function(req,res){
+	//var hand_val = 40;
+	ConSchema.find({ID:'123'},function(err,obj){
+		if (err) {
+            console.log("Error:" + err);
+        }else{
+			if(obj.length > 0){
+                //新建
+				var hand_val = obj[0].control||50;
+				res.send({data:{hand:hand_val,weather:20}})
+            }
+			else{
+				res.send({data:{weather:20}})
+			}
+		}
+	})
+})
 
 var server = app.listen(process.env.PORT||1993,function(){
     console.log('server connect');
