@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 //数据库地址
-DB_URL = process.env.MONGOLDB_URI || 'mongodb://localhost:27017/mongoose';
+DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/mongoose';
 
 mongoose.connect(DB_URL);
 console.log('connect success');

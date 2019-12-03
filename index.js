@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 //var crypto = require("crypto");
 
 //链接本地数据库
-var DB_URL = process.env.MONGOLDB_URI || 'mongodb://localhost:27017/mongoose'; 
+var DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/mongoose'; 
 
 mongoose.connect(DB_URL);
 
