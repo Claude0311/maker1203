@@ -4,7 +4,10 @@
   "description": "maker project 2019",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"dbstart": "sudo service mongodb start",
+    "start": "node index.js",
+    "chmod": "sudo chmod -R 755 ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Claude0311/maker1203/issues"
   },
-  "homepage": "https://github.com/Claude0311/maker1203#readme"
+  "homepage": "https://github.com/Claude0311/maker1203#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.13"
+  }
 }

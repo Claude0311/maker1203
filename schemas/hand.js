@@ -1,4 +1,4 @@
-var mongoose = require('./db'),
+var mongoose = require('./database'),
     Schema = mongoose.Schema;
 
 var Job_Schema = new Schema({
