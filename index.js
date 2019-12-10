@@ -79,4 +79,5 @@ app.all('/getdata',function(req,res){
 var server = app.listen(process.env.PORT||1993,function(){
     console.log('server connect');
 	console.log(DB_URL);
+	console.log(process.env.PORT);
 })
