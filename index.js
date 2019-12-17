@@ -65,11 +65,11 @@ app.all('/getdata',function(req,res){
 			if(obj.length > 0){
                 //傳直
 				var hand_val = obj[0].control||50;
-				res.send({data:{hand:hand_val,weather:weather_val||50}});
+				res.json({data:{hand:hand_val,weather:weather_val||50}});
 				console.log('hand & weather sent');
             }
 			else{
-				res.send({data:{weather:20}});
+				res.json({data:{weather:20}});
 				console.log('weather sent');
 			}
 		}
