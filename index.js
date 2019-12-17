@@ -76,6 +76,15 @@ app.all('/getdata',function(req,res){
 	})
 })
 
+app.post('/json',function(req,res){
+	var jsonD = req.body;
+	var temp = jsonD.temp;
+	
+	console.log("溫度"+tmep);
+	res.json({weather:50});
+	
+})
+
 var server = app.listen(process.env.PORT||1993,function(){
     console.log('server connect');
 	console.log(DB_URL);
