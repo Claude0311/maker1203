@@ -81,7 +81,7 @@ app.post('/json',function(req,res){
 	var temp = jsonD.temp;
 	
 	console.log("溫度"+tmep);
-	res.json({weather:50});
+	res.send('get it!');
 	
 })
 
