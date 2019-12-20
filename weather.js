@@ -21,7 +21,7 @@ module.exports = {
 			
 			const average = list => list.reduce((prev, curr) => prev + curr) / list.length;
 			//console.log(average(weathers));
-			resolve(average(weathers)));
+			resolve(average(weathers));
 		})
 	})
 }
