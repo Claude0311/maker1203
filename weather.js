@@ -19,6 +19,6 @@ request(url, (err, res, body) => {
 	
 	const average = list => list.reduce((prev, curr) => prev + curr) / list.length;
 	//console.log(average(weathers));
-	module.exports = average(weathers) // 15
+	console.log("export",module.exports = average(weathers)) // 15
 })
 
