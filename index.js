@@ -58,8 +58,7 @@ app.post('/chdb', function (req, res) {
 
 app.all('/getdata',async (req,res)=>{
 	//var hand_val = 40;
-	var weather_val = await require('./weather.js').getWeather||50;
-	var predict_val = await require('./predict.js').getPredict||50;
+	let [weather_val, predict_val] = await Promise.all([require('./weather.js').getWeather||50, require('./predict.js').getPredict||50]);
 	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
