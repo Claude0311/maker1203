@@ -58,7 +58,8 @@ app.post('/chdb', function (req, res) {
 
 app.all('/getdata',function(req,res){
 	//var hand_val = 40;
-	var weather_val = require('./weather.js');
+	var weather_val = require('./weather.js')||50;
+	var predict_val = require('./predict.js')||50;
 	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
@@ -68,11 +69,11 @@ app.all('/getdata',function(req,res){
 				var hand_val = obj[0].control||50;
 				var msg_val = obj[0].message||"";
 				var mode_val = obj[0].setmode||0;
-				res.json({data:{hand:hand_val,weather:weather_val||50,message:msg_val,mode:mode_val}});
+				res.json({data:{hand:hand_val,weather:weather_val,message:msg_val,mode:mode_val,predict:predict_val}});
 				console.log('hand & weather sent');
             }
 			else{
-				res.json({data:{weather:20}});
+				res.json({data:{weather:weather_val,predict:predict_val}});
 				console.log('weather sent');
 			}
 		}

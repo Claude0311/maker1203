@@ -8,7 +8,7 @@ request(url, (err, res, body) => {
 	let weathers = [];
 	//console.log($('.BoxTable tbody tr').eq(1).eq(1));
 	const table_tr = $('.BoxTable tbody tr');
-	for (let i = 1; i < table_tr.length; i++) { // 走訪 tr
+	for (let i = 1; i < 8; i++) { //每三小時一個，最多72小時
       const table_td = table_tr.eq(i).find('td'); // 擷取每個欄位(td)
       const mois = table_td.eq(7).text();  //濕度
       // 建立物件並(push)存入結果

@@ -61,6 +61,8 @@
 			</select>
 			<p>過去24小時相對濕度(%)：</p>
 			<p id='weather'></p>
+			<p>未來24小時相對濕度(%)：</p>
+			<p id='predict'></p>
 			<p>Arduino端的回傳資訊：</p>
 			<p id='message'></p>
 			<input type='button' onclick='UpdateStatus()' value='Status Update'>
@@ -83,6 +85,7 @@
 		  document.getElementById("myRange").value = data.data.hand||20;
 		  document.getElementById("demo").innerHTML = data.data.hand||20;
 		  document.getElementById("weather").innerHTML = data.data.weather||50;
+		  document.getElementById("predict").innerHTML = data.data.predict||50;
 		  document.getElementById("message").innerHTML = data.data.message||"";
 		  document.getElementById("mode").selectedIndex = data.data.mode||0;
 		});
