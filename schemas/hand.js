@@ -4,7 +4,7 @@ var mongoose = require('./database'),
 var Job_Schema = new Schema({
     ID : String,
 	control : {type:Number, default:50},
-	message : String
+	message : String,
 	setmode : Number
 })
 
