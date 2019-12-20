@@ -56,10 +56,10 @@ app.post('/chdb', function (req, res) {
   })
 });
 
-app.all('/getdata',function(req,res){
+app.all('/getdata',async function(req,res){
 	//var hand_val = 40;
-	var weather_val = require('./weather.js')||50;
-	var predict_val = require('./predict.js')||50;
+	var weather_val = await require('./weather.js')||50;
+	var predict_val = await require('./predict.js')||50;
 	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
