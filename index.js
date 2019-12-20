@@ -69,6 +69,7 @@ app.all('/getdata',async function(req,res){
 				var hand_val = obj[0].control||50;
 				var msg_val = obj[0].message||"";
 				var mode_val = obj[0].setmode||0;
+				console.log(weather_val);
 				res.json({data:{hand:hand_val,weather:weather_val,message:msg_val,mode:mode_val,predict:predict_val}});
 				console.log('hand & weather sent');
             }
