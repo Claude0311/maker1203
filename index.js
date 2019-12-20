@@ -77,7 +77,7 @@ app.all('/getdata',function(req,res){
 	})
 })
 
-app.post('/savedata',function(req,res){
+app.get('/savedata',function(req,res){
 	var jsonD = req.body;
 	var msg = jsonD.msg;
 	
