@@ -90,7 +90,7 @@ app.post('/savedata',function(req,res){
 				if (err) throw err;
 			});
 		}
-	}
+	})
 })
 
 var server = app.listen(process.env.PORT||1993,function(){
