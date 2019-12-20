@@ -88,6 +88,7 @@ app.get('/savedata',function(req,res){
 		if(!err && obj.length>0){
 			ConSchema.updateOne({ID:'123'},{$set:{message:msg}},function(err,res){
 				if (err) throw err;
+				console.log({message:msg})
 			});
 		}
 	})
