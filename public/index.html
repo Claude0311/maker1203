@@ -49,12 +49,17 @@
 </style>
 <body onload="showinit()">
     <div class="container">
-        <h1>我 是 首 頁</h1>
+        <h1>首頁</h1>
 			<div class="slidecontainer">
-			  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
 			</div>
 			<p id='demo'></p>
-			<p>過去8小時相對濕度(%)：</p>
+			<select id="mode">
+				<option value="1">僅參考手動調整</option>
+				<option value="2">參考手動調整和氣象資訊</option>
+				<option value="3">僅參考氣象資訊</option>
+			</select>
+			<p>過去24小時相對濕度(%)：</p>
 			<p id='weather'></p>
 			<p>Arduino端的回傳資訊：</p>
 			<p id='message'></p>
@@ -79,17 +84,19 @@
 		  document.getElementById("demo").innerHTML = data.data.hand||20;
 		  document.getElementById("weather").innerHTML = data.data.weather||50;
 		  document.getElementById("message").innerHTML = data.data.message||"";
+		  document.getElementById("mode").selectIndex = data.data.mode||0;
 		});
 	}
 	
 	function UpdateStatus(){
 		var control = $("#demo").text();
-		console.log('send：',control);
+		var mode = $("#mode").value;
+		console.log('send：',control," and ",mode);
 		$.ajax({
 			type: "post",
 			url: "/chdb",
 			dataType: "json",
-			data:{ "percent": control },
+			data:{ "percent": control ,"mode":mode},
 			success: function(data){
 			//接受返回的数据，前端判断采取的动作
 			//console.log(data);

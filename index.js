@@ -26,15 +26,16 @@ app.get('/',function(req,res){
 var ConSchema = require('./schemas/hand.js');
 
 app.post('/chdb', function (req, res) {
-	var percent = req.body.percent;
-	console.log('percent',percent,"body",req.body);
+	var percent = req.body.percent||50;
+	var mode = req.body.mode||0;
+	console.log('percent',percent," mode=",mode);
 	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
         }else{
 			if(obj.length == 0){
                 //新建
-				var newper = new ConSchema({ID:'123',control:percent});
+				var newper = new ConSchema({ID:'123',control:percent,setmode:mode});
 				newper.save(function(err,res){
 					if(err){
 						console.log(err);
@@ -46,7 +47,7 @@ app.post('/chdb', function (req, res) {
 				}});
             }else{
 				console.log("更改資料");
-                ConSchema.updateOne({ID:'123'},{$set:{control:percent}},function(err,res){
+                ConSchema.updateOne({ID:'123'},{$set:{control:percent,setmode:mode}},function(err,res){
 					if (err) throw err;
 				});
 				res.send({status:'success',message:true});
@@ -66,7 +67,8 @@ app.all('/getdata',function(req,res){
                 //傳直
 				var hand_val = obj[0].control||50;
 				var msg_val = obj[0].message||"";
-				res.json({data:{hand:hand_val,weather:weather_val||50,message:msg_val}});
+				var mode_val = obj[0].setmode||0;
+				res.json({data:{hand:hand_val,weather:weather_val||50,message:msg_val,mode:mode_val}});
 				console.log('hand & weather sent');
             }
 			else{
