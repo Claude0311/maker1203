@@ -56,7 +56,7 @@ app.post('/chdb', function (req, res) {
   })
 });
 
-app.all('/getdata',async function(req,res){
+app.all('/getdata',async (req,res)=>{
 	//var hand_val = 40;
 	var weather_val = await require('./weather.js')||50;
 	var predict_val = await require('./predict.js')||50;
