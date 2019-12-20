@@ -78,8 +78,7 @@ app.all('/getdata',function(req,res){
 })
 
 app.get('/savedata',function(req,res){
-	var jsonD = req.body;
-	var msg = jsonD.msg;
+	var msg = req.query.msg;
 	
 	console.log("收到訊息："+msg);
 	res.send('get it!');
