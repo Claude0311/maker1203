@@ -54,7 +54,10 @@
 			  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
 			</div>
 			<p id='demo'></p>
+			<p>過去8小時相對濕度(%)：</p>
 			<p id='weather'></p>
+			<p>Arduino端回傳資訊</p>
+			<p id='message'></p>
 			<input type='button' onclick='UpdateStatus()' value='Status Update'>
     </div>
 </body>
@@ -75,6 +78,7 @@
 		  document.getElementById("myRange").value = data.data.hand||20;
 		  document.getElementById("demo").innerHTML = data.data.hand||20;
 		  document.getElementById("weather").innerHTML = data.data.weather||50;
+		  document.getElementById("weather").innerHTML = data.data.message||"";
 		});
 	}
 	

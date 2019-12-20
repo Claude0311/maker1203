@@ -24,10 +24,11 @@ app.get('/',function(req,res){
 })
 
 var ConSchema = require('./schemas/hand.js');
+
 app.post('/chdb', function (req, res) {
-  var percent = req.body.percent;
-  console.log('percent',percent,"body",req.body);
-  ConSchema.find({ID:'123'},function(err,obj){
+	var percent = req.body.percent;
+	console.log('percent',percent,"body",req.body);
+	ConSchema.find({ID:'123'},function(err,obj){
 		if (err) {
             console.log("Error:" + err);
         }else{
@@ -47,7 +48,6 @@ app.post('/chdb', function (req, res) {
 				console.log("更改資料");
                 ConSchema.updateOne({ID:'123'},{$set:{control:percent}},function(err,res){
 					if (err) throw err;
-					
 				});
 				res.send({status:'success',message:true});
 			}
@@ -65,7 +65,8 @@ app.all('/getdata',function(req,res){
 			if(obj.length > 0){
                 //傳直
 				var hand_val = obj[0].control||50;
-				res.json({data:{hand:hand_val,weather:weather_val||50}});
+				var msg_val = obj[0].message||"";
+				res.json({data:{hand:hand_val,weather:weather_val||50,message:msg_val}});
 				console.log('hand & weather sent');
             }
 			else{
@@ -76,13 +77,20 @@ app.all('/getdata',function(req,res){
 	})
 })
 
-app.post('/json',function(req,res){
+app.post('/savedata',function(req,res){
 	var jsonD = req.body;
-	var temp = jsonD.temp;
+	var msg = jsonD.msg;
 	
-	console.log("溫度"+tmep);
+	console.log("收到訊息："+msg);
 	res.send('get it!');
 	
+	ConSchema.find({ID:'123'},function(err,obj){
+		if(!err && obj.length>0){
+			ConSchema.updateOne({ID:'123'},{$set:{message:msg}},function(err,res){
+				if (err) throw err;
+			});
+		}
+	}
 })
 
 var server = app.listen(process.env.PORT||1993,function(){
