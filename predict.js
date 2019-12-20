@@ -15,5 +15,5 @@ request({url:url,json:true}, (err, res, body) => {
 	
 	const average = list => list.reduce((prev, curr) => prev + curr) / list.length;
 	//console.log(average(weathers));
-	module.exports = average(weathers); // 15
+	module.exports = new Promise(average(weathers)); // 15
 })
